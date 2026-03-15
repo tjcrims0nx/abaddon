@@ -107,8 +107,7 @@ def setup_provider(console):
 [5] Belial's Whispers (DashScope Qwen)       - [STATUS: ACTIVE]
 [6] Legion's Multi-Core (MuleRouter)         - [STATUS: ROUTING]
 [7] Pandemonium Network (OpenRouter)         - [STATUS: ROUTING]
-------------------------------------------------------------
-[ENTER SELECTION]:[/]"""
+------------------------------------------------------------[/]"""
     console.print(menu_ui)
     
     provider_map = {
