@@ -155,9 +155,9 @@ def setup_provider(console):
     if provider == "gemini":
         model_name = questionary.select(
             "Select Gemini Model:",
-            choices=["gemini-3.1-pro", "gemini-3.1-flash"],
+            choices=["gemini-2.5-flash", "gemini-2.5-pro", "gemini-2.0-flash", "gemini-1.5-pro"],
             style=_qstyle
-        ).ask() or "gemini-3.1-pro"
+        ).ask() or "gemini-2.5-flash"
         get_or_set_key(console, "GEMINI_API_KEY", "Gemini API Key")
             
     elif provider == "ollama":
