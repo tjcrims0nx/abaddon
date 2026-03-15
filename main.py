@@ -144,7 +144,10 @@ def setup_provider(console):
     model_name = ""
 
     if provider == "gemini":
-        model_name = "gemini-2.5-flash"
+        console.print("[dim]ℹ Available models: gemini-3.1-pro, gemini-3.1-flash, gemini-2.5-pro, gemini-2.5-flash[/dim]")
+        model_name = console.input("[bold cyan]?[/bold cyan] [bold yellow]Enter Gemini Model: [/bold yellow]").strip()
+        if not model_name:
+            model_name = "gemini-3.1-pro"
         get_or_set_key(console, "GEMINI_API_KEY", "Gemini API Key")
             
     elif provider == "ollama":
