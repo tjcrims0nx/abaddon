@@ -45,37 +45,34 @@ ABADDON_FACE = """
 [bold yellow] `---' [/][bold #8b4513]====================[/]
 """
 
+TITLE_ASCII = r"""[bold #e87961]
+██████╗ ███████╗███╗   ███╗██████╗ ███╗   ██╗     ██████╗ ███████╗    
+██╔══██╗██╔════╝████╗ ████║██╔═══██╗████╗  ██║    ██╔═══██╗██╔════╝    
+██║  ██║█████╗  ██╔████╔██║██║   ██║██╔██╗ ██║    ██║   ██║███████╗    
+██║  ██║██╔══╝  ██║╚██╔╝██║██║   ██║██║╚██╗██║    ██║   ██║╚════██║    
+██████╔╝███████╗██║ ╚═╝ ██║╚██████╔╝██║ ╚████║    ╚██████╔╝███████║    
+╚═════╝ ╚══════╝╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═══╝     ╚═════╝ ╚══════╝    
+                                                                       
+    ███████╗ ██████╗ ███╗   ██╗██╗         ██╗  ██╗ █████╗ ██████╗ ██╗   ██╗███████╗███████╗████████╗███████╗██████╗ 
+    ██╔════╝██╔═══██╗████╗  ██║██║         ██║  ██║██╔══██╗██╔══██╗██║   ██║██╔════╝██╔════╝╚══██╔══╝██╔════╝██╔══██╗
+    ███████╗██║   ██║██╔██╗ ██║██║         ███████║███████║██████╔╝██║   ██║█████╗  ███████╗   ██║   █████╗  ██████╔╝
+    ╚════██║██║   ██║██║╚██╗██║██║         ██╔══██║██╔══██║██╔══██╗╚██╗ ██╔╝██╔══╝  ╚════██║   ██║   ██╔══╝  ██╔══██╗
+    ███████║╚██████╔╝██║ ╚████║███████╗    ██║  ██║██║  ██║██║  ██║ ╚████╔╝ ███████╗███████║   ██║   ███████╗██║  ██║
+    ╚══════╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝  ╚═══╝  ╚══════╝╚══════╝   ╚═╝   ╚══════╝╚═╝  ╚═╝
+[/]"""
+
 def print_welcome():
     console.clear()
     
-    # Top decorative separator
-    console.print(Rule("[bold dark_red]✦ A B A D D O N ✦[/bold dark_red]", style="dark_red"))
-    console.print()
+    console.print(Align.center(ABADDON_FACE))
+    console.print(Align.center(TITLE_ASCII))
     
-    # Wrap ASCII face in a gothic panel with double-line border style matching the photo
-    face_panel = Panel(
-        Align.center(ABADDON_FACE),
-        title="[bold dark_red on black]⸸ DEMON OF THE INFERNAL REALM ⸸[/bold dark_red on black]",
-        subtitle="[dim dark_red]Fruit Loops Enthusiast · Former Hell-Lord · Currently Imprisoned[/dim dark_red]",
-        border_style="dark_red",
-        padding=(0, 2),
-        expand=False
-    )
-    console.print(Align.center(face_panel))
-    console.print()
-    
-    # Theatrical multi-line welcome message
-    welcome_lines = [
-        "[bold red]⚡[/] [italic #cc6666]The vessel stirs... Ancient evil seeps through the silicon...[/italic #cc6666]",
-        "[bold red]⸸[/] [bold white]ABADDON[/bold white] [italic gray]has been roused from his thousand-year slumber.[/italic gray]",
-        "[dim]❙[/] [italic #888888]He is displeased. He wanted Fruit Loops. He got a terminal window.[/italic #888888]",
-    ]
-    for line in welcome_lines:
-        console.print(Align.center(line))
-        
-    console.print()
-    console.print(Rule(style="dark_red"))
-    console.print()
+    welcome_message = """[bold #e87961]
+[SYSTEM LOG] [RECALLING USER: MORTAL_72]
+[LOADING SOUL_HARVESTER_V666.EXE... OK]
+[QUERYING PROVIDER NETWORK...][/]
+"""
+    console.print(Align.center(welcome_message))
 
 def get_or_set_key(console, env_var_name: str, friendly_name: str) -> str:
     """Helper to load a key from environment/dotenv, or prompt and save it."""
@@ -100,42 +97,36 @@ def get_or_set_key(console, env_var_name: str, friendly_name: str) -> str:
 
 def setup_provider(console):
     """Handles interactive selection and instantiation of the provider agent."""
-    console.print()
+    menu_ui = """[bold #e87961]------------------------------------------------------------
+[PROVIDER SELECTION MENU]
+------------------------------------------------------------
+[1] Asmodeus Infernal Services (Gemini)      - [STATUS: PRIME]
+[2] Baal's Blood Tithe Network (Ollama)      - [STATUS: DEGRADED]
+[3] Mephistopheles' Soul Exchange (Claude)   - [STATUS: OPTIMAL]
+[4] Astaroth's Sinful Solutions (NVIDIA NIM) - [STATUS: OFFLINE]
+[5] Belial's Whispers (DashScope Qwen)       - [STATUS: ACTIVE]
+[6] Legion's Multi-Core (MuleRouter)         - [STATUS: ROUTING]
+[7] Pandemonium Network (OpenRouter)         - [STATUS: ROUTING]
+------------------------------------------------------------
+[ENTER SELECTION]:[/]"""
+    console.print(menu_ui)
     
-    # Use questionary for an interactive up/down menu
-    provider_choice = questionary.select(
-        "Bind Infernal Link To:",
-        choices=[
-            "1) Gemini (Google API)",
-            "2) Ollama (Local Models)",
-            "3) Claude (Anthropic API)",
-            "4) Nvidia NIM (OpenAI-compatible)",
-            "5) Qwen (Aliyun DashScope)",
-            "6) MuleRouter (Qwen/Multi-model)",
-            "7) OpenRouter (Multi-model)"
-        ],
-        style=questionary.Style([
-            ('qmark', 'fg:red bold'),
-            ('question', 'fg:yellow bold'),
-            ('answer', 'fg:cyan bold'),
-            ('pointer', 'fg:red bold'),
-            ('highlighted', 'fg:white bold bg:darkred'),
-            ('selected', 'fg:cyan'),
-        ])
-    ).ask()
-
-    if not provider_choice:
-        sys.exit(0) # User cancelled with Ctrl+C
-
     provider_map = {
-        "1) Gemini (Google API)": "gemini",
-        "2) Ollama (Local Models)": "ollama",
-        "3) Claude (Anthropic API)": "anthropic",
-        "4) Nvidia NIM (OpenAI-compatible)": "nim",
-        "5) Qwen (Aliyun DashScope)": "qwen",
-        "6) MuleRouter (Qwen/Multi-model)": "mulerouter",
-        "7) OpenRouter (Multi-model)": "openrouter",
+        "1": "gemini",
+        "2": "ollama",
+        "3": "anthropic",
+        "4": "nim",
+        "5": "qwen",
+        "6": "mulerouter",
+        "7": "openrouter",
     }
+    
+    while True:
+        choice = console.input("\\n[bold #e87961][Mortal] > [/]").strip()
+        if choice in provider_map:
+            provider_choice = choice
+            break
+        console.print("[bold red]Invalid selection. Enter a number 1-7.[/]")
     
     provider = provider_map[provider_choice]
     model_name = ""
