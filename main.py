@@ -143,48 +143,75 @@ def setup_provider(console):
     provider = provider_map[provider_choice]
     model_name = ""
 
+    _qstyle = questionary.Style([
+        ('qmark', 'fg:red bold'),
+        ('question', 'fg:yellow bold'),
+        ('answer', 'fg:cyan bold'),
+        ('pointer', 'fg:red bold'),
+        ('highlighted', 'fg:white bold bg:darkred'),
+        ('selected', 'fg:cyan'),
+    ])
+
     if provider == "gemini":
-        console.print("[dim]ℹ Available models: gemini-3.1-pro, gemini-3.1-flash[/dim]")
-        model_name = console.input("[bold cyan]?[/bold cyan] [bold yellow]Enter Gemini Model: [/bold yellow]").strip()
-        if not model_name:
-            model_name = "gemini-3.1-pro"
+        model_name = questionary.select(
+            "Select Gemini Model:",
+            choices=["gemini-3.1-pro", "gemini-3.1-flash"],
+            style=_qstyle
+        ).ask() or "gemini-3.1-pro"
         get_or_set_key(console, "GEMINI_API_KEY", "Gemini API Key")
             
     elif provider == "ollama":
-        model_name = console.input("[bold cyan]?[/bold cyan] [bold yellow]Enter Ollama Model (e.g., qwen2.5-coder, llama3.1): [/bold yellow]").strip()
-        if not model_name:
-            # Llama3 doesn't support tools natively via Ollama 400 API; fall back to 3.1 or a coder model
-            model_name = "llama3.1" 
+        model_name = questionary.select(
+            "Select Ollama Model:",
+            choices=["llama3.1", "qwen2.5-coder", "mistral", "deepseek-r1", "Other (type below)"],
+            style=_qstyle
+        ).ask() or "llama3.1"
+        if model_name == "Other (type below)":
+            model_name = console.input("[bold cyan]?[/bold cyan] [bold yellow]Enter Ollama Model name: [/bold yellow]").strip() or "llama3.1"
         console.print(f"[dim]ℹ[/] [italic gray]Attempting to bind core to Local Model: {model_name}[/italic gray]")
         
     elif provider == "anthropic":
-        model_name = "claude-3-7-sonnet-20250219"
+        model_name = questionary.select(
+            "Select Claude Model:",
+            choices=["claude-3-7-sonnet-20250219", "claude-3-5-sonnet-20241022", "claude-3-haiku-20240307"],
+            style=_qstyle
+        ).ask() or "claude-3-7-sonnet-20250219"
         get_or_set_key(console, "ANTHROPIC_API_KEY", "Anthropic API Key")
 
     elif provider == "nim":
-        model_name = console.input("[bold cyan]?[/bold cyan] [bold yellow]Enter NIM Model (e.g., meta/llama3-70b-instruct): [/bold yellow]").strip()
-        if not model_name:
-            model_name = "meta/llama3-70b-instruct"
+        model_name = questionary.select(
+            "Select NIM Model:",
+            choices=["meta/llama3-70b-instruct", "meta/llama3-8b-instruct", "mistralai/mistral-7b-instruct-v0.3", "Other (type below)"],
+            style=_qstyle
+        ).ask() or "meta/llama3-70b-instruct"
+        if model_name == "Other (type below)":
+            model_name = console.input("[bold cyan]?[/bold cyan] [bold yellow]Enter NIM Model name: [/bold yellow]").strip() or "meta/llama3-70b-instruct"
         get_or_set_key(console, "NVIDIA_API_KEY", "NVIDIA API Key")
 
     elif provider == "qwen":
-        model_name = console.input("[bold cyan]?[/bold cyan] [bold yellow]Enter Qwen Model (e.g., qwen-max): [/bold yellow]").strip()
-        if not model_name:
-            model_name = "qwen-max"
+        model_name = questionary.select(
+            "Select Qwen Model:",
+            choices=["qwen-max", "qwen-plus", "qwen-turbo", "qwen-long"],
+            style=_qstyle
+        ).ask() or "qwen-max"
         get_or_set_key(console, "QWEN_API_KEY", "DashScope API Key")
 
     elif provider == "mulerouter":
-        console.print("[dim]ℹ Available models: qwen-flash, qwen-plus, qwen3-max, qwen3.5-plus, grok-4, grok-code-fast-1[/dim]")
-        model_name = console.input("[bold cyan]?[/bold cyan] [bold yellow]Enter MuleRouter Model name (not the key!): [/bold yellow]").strip()
-        if not model_name:
-            model_name = "qwen-plus"
+        model_name = questionary.select(
+            "Select MuleRouter Model:",
+            choices=["qwen-plus", "qwen-flash", "qwen3-max", "qwen3.5-plus", "grok-4", "grok-code-fast-1"],
+            style=_qstyle
+        ).ask() or "qwen-plus"
         get_or_set_key(console, "MULEROUTER_API_KEY", "MuleRouter API Key")
 
     elif provider == "openrouter":
-        console.print("[dim]ℹ Available models: qwen/qwen3-235b-a22b, google/gemma-3-27b-it, meta-llama/llama-3.1-8b-instruct[/dim]")
-        model_name = console.input("[bold cyan]?[/bold cyan] [bold yellow]Enter OpenRouter Model name (not the key!): [/bold yellow]").strip()
-        if not model_name:
-            model_name = "qwen/qwen3-235b-a22b"
+        model_name = questionary.select(
+            "Select OpenRouter Model:",
+            choices=["qwen/qwen3-235b-a22b", "google/gemma-3-27b-it", "meta-llama/llama-3.1-8b-instruct", "Other (type below)"],
+            style=_qstyle
+        ).ask() or "qwen/qwen3-235b-a22b"
+        if model_name == "Other (type below)":
+            model_name = console.input("[bold cyan]?[/bold cyan] [bold yellow]Enter OpenRouter Model name: [/bold yellow]").strip() or "qwen/qwen3-235b-a22b"
         get_or_set_key(console, "OPENROUTER_API_KEY", "OpenRouter API Key")
 
     try:
