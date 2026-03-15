@@ -104,26 +104,23 @@ def setup_provider(console):
     
     # Use questionary for an interactive up/down menu
     provider_choice = questionary.select(
-        "Select Abaddon Core Provider",
+        "Bind Infernal Link To:",
         choices=[
-            "1. Gemini (Google API)",
-            "2. Ollama (Local Models)",
-            "3. Claude (Anthropic API)",
-            "4. Nvidia NIM (OpenAI-compatible)",
-            "5. Qwen (Aliyun DashScope)",
-            "6. MuleRouter (Qwen/Multi-model)",
-            "7. OpenRouter (Multi-model)"
+            "1) Gemini (Google API)",
+            "2) Ollama (Local Models)",
+            "3) Claude (Anthropic API)",
+            "4) Nvidia NIM (OpenAI-compatible)",
+            "5) Qwen (Aliyun DashScope)",
+            "6) MuleRouter (Qwen/Multi-model)",
+            "7) OpenRouter (Multi-model)"
         ],
-        qmark=">",
-        pointer="●",
-        instruction="\n(Use Enter to select, Up/Down to navigate)",
         style=questionary.Style([
-            ('qmark', 'fg:white bold'),
-            ('question', 'fg:white bold'),
-            ('instruction', 'fg:darkred'),     # Dark red bottom text
-            ('pointer', 'fg:#28C0A0 bold'),    # Green dot
-            ('highlighted', 'fg:#28C0A0 bold'),# Green text when selected
-            ('text', 'fg:white'),              # Unselected text
+            ('qmark', 'fg:red bold'),
+            ('question', 'fg:yellow bold'),
+            ('answer', 'fg:cyan bold'),
+            ('pointer', 'fg:red bold'),
+            ('highlighted', 'fg:white bold bg:darkred'),
+            ('selected', 'fg:cyan'),
         ])
     ).ask()
 
@@ -131,13 +128,13 @@ def setup_provider(console):
         sys.exit(0) # User cancelled with Ctrl+C
 
     provider_map = {
-        "1. Gemini (Google API)": "gemini",
-        "2. Ollama (Local Models)": "ollama",
-        "3. Claude (Anthropic API)": "anthropic",
-        "4. Nvidia NIM (OpenAI-compatible)": "nim",
-        "5. Qwen (Aliyun DashScope)": "qwen",
-        "6. MuleRouter (Qwen/Multi-model)": "mulerouter",
-        "7. OpenRouter (Multi-model)": "openrouter",
+        "1) Gemini (Google API)": "gemini",
+        "2) Ollama (Local Models)": "ollama",
+        "3) Claude (Anthropic API)": "anthropic",
+        "4) Nvidia NIM (OpenAI-compatible)": "nim",
+        "5) Qwen (Aliyun DashScope)": "qwen",
+        "6) MuleRouter (Qwen/Multi-model)": "mulerouter",
+        "7) OpenRouter (Multi-model)": "openrouter",
     }
     
     provider = provider_map[provider_choice]
