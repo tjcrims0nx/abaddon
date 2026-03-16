@@ -1,0 +1,36 @@
+c:\Users\tjcri\.gemini\antigravity\scratch\abaddon\agent.py
+  c:\Users\tjcri\.gemini\antigravity\scratch\abaddon\agent.py:161:16 - error: Type "str | None" is not assignable to return type "str"
+    Type "str | None" is not assignable to type "str"
+      "None" is not assignable to "str" (reportReturnType)
+  c:\Users\tjcri\.gemini\antigravity\scratch\abaddon\agent.py:250:30 - error: Argument of type "list[dict[str, Any]]" cannot be assigned to parameter "messages" of type "Iterable[MessageParam]" in function "create"
+    "list[dict[str, Any]]" is not assignable to "Iterable[MessageParam]"
+      Type parameter "_T_co@Iterable" is covariant, but "dict[str, Any]" is not a subtype of "MessageParam"
+        "dict[str, Any]" is not assignable to "MessageParam" (reportArgumentType)
+  c:\Users\tjcri\.gemini\antigravity\scratch\abaddon\agent.py:320:30 - error: Argument of type "list[dict[str, Any]]" cannot be assigned to parameter "messages" of type "Iterable[ChatCompletionMessageParam]" in function "create"
+    "list[dict[str, Any]]" is not assignable to "Iterable[ChatCompletionMessageParam]"
+      Type parameter "_T_co@Iterable" is covariant, but "dict[str, Any]" is not a subtype of "ChatCompletionMessageParam"
+        Type "dict[str, Any]" is not assignable to type "ChatCompletionMessageParam"
+          "dict[str, Any]" is not assignable to "ChatCompletionDeveloperMessageParam"
+          "dict[str, Any]" is not assignable to "ChatCompletionSystemMessageParam"
+          "dict[str, Any]" is not assignable to "ChatCompletionUserMessageParam"
+          "dict[str, Any]" is not assignable to "ChatCompletionAssistantMessageParam"
+          "dict[str, Any]" is not assignable to "ChatCompletionToolMessageParam"
+    ... (reportArgumentType)
+  c:\Users\tjcri\.gemini\antigravity\scratch\abaddon\agent.py:327:34 - error: Argument of type "ChatCompletionMessage" cannot be assigned to parameter "object" of type "dict[str, Any]" in function "append"
+    "ChatCompletionMessage" is not assignable to "dict[str, Any]" (reportArgumentType)
+  c:\Users\tjcri\.gemini\antigravity\scratch\abaddon\agent.py:331:49 - error: Cannot access attribute "function" for class "ChatCompletionMessageCustomToolCall"
+    Attribute "function" is unknown (reportAttributeAccessIssue)
+  c:\Users\tjcri\.gemini\antigravity\scratch\abaddon\agent.py:332:54 - error: Cannot access attribute "function" for class "ChatCompletionMessageCustomToolCall"
+    Attribute "function" is unknown (reportAttributeAccessIssue)
+  c:\Users\tjcri\.gemini\antigravity\scratch\abaddon\agent.py:336:43 - error: Cannot access attribute "function" for class "ChatCompletionMessageCustomToolCall"
+    Attribute "function" is unknown (reportAttributeAccessIssue)
+c:\Users\tjcri\.gemini\antigravity\scratch\abaddon\tools.py
+  c:\Users\tjcri\.gemini\antigravity\scratch\abaddon\tools.py:118:30 - error: "fileno" is not a known attribute of "None" (reportOptionalMemberAccess)
+  c:\Users\tjcri\.gemini\antigravity\scratch\abaddon\tools.py:119:29 - error: "fcntl" is not a known attribute of module "fcntl" (reportAttributeAccessIssue)
+  c:\Users\tjcri\.gemini\antigravity\scratch\abaddon\tools.py:119:45 - error: "F_GETFL" is not a known attribute of module "fcntl" (reportAttributeAccessIssue)
+  c:\Users\tjcri\.gemini\antigravity\scratch\abaddon\tools.py:120:24 - error: "fcntl" is not a known attribute of module "fcntl" (reportAttributeAccessIssue)
+  c:\Users\tjcri\.gemini\antigravity\scratch\abaddon\tools.py:120:40 - error: "F_SETFL" is not a known attribute of module "fcntl" (reportAttributeAccessIssue)
+  c:\Users\tjcri\.gemini\antigravity\scratch\abaddon\tools.py:120:57 - error: "O_NONBLOCK" is not a known attribute of module "os" (reportAttributeAccessIssue)
+  c:\Users\tjcri\.gemini\antigravity\scratch\abaddon\tools.py:123:35 - error: "read" is not a known attribute of "None" (reportOptionalMemberAccess)
+  c:\Users\tjcri\.gemini\antigravity\scratch\abaddon\tools.py:125:35 - error: "read" is not a known attribute of "None" (reportOptionalMemberAccess)
+15 errors, 0 warnings, 0 informations

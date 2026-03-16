@@ -139,20 +139,40 @@ You'll be greeted by an interactive gothic terminal UI where you can bind Abaddo
 
 | Command | Effect |
 |---|---|
-| `/provider` | Hot-swap the AI provider/model without losing history |
-| `/clear-keys` | Purge saved API keys from `.env` |
+| `/provider` | Switch the AI provider/model (Ollama models auto-detected locally) |
+| `/sync-skills` | Manually sync `skill_list.md` and install missing skills |
+| `/run-skill` | **Execute** an installed skill (direct script or Abaddon-orchestrated) |
+| `/settings` | Toggle Permission Levels (System Access vs Restricted) |
+| `/api-key` | Update a specific provider's API key |
+| `/clear-keys` | Purge all saved API keys from `.env` |
 | `clear` / `cls` | Redraw the welcome screen |
 | `exit` / `quit` | Gracefully shut down |
 
 ---
 
-## 🛡️ Security Warning
+## 🛡️ Permission System: Restricted vs. Full Autonomy
 
-> **WARNING:** Abaddon is configured out-of-the-box for MAXIMUM local power. The `run_command` tool executes raw `shell=True` commands on your host environment. The `execute_python` tool runs arbitrary code. Both are intended for local developer use ONLY.
+Abaddon now features a granular permission system stored in `.env` as `ABADDON_SYSTEM_ACCESS`. On your first launch, you will be prompted to choose a level:
+
+- **FULL AUTONOMY (GRANTED)**: Abaddon has explicit permission to run any command, read/write/delete any file, and execute any code without confirmation. This is the intended "Agentic" experience.
+- **RESTRICTED MODE**: Abaddon will briefly confirm intent with you before performing potentially destructive or high-risk actions (e.g., deleting files, root commands).
+
+You can toggle this at any time using the **`/settings`** command.
+
+---
+
+## ⚡ UX Improvements
+
+- **Interactive Selection**: Uses `questionary` for beautiful arrow-key selection of models and skills.
+- **Ctrl+C Interrupt**: Press `Ctrl+C` while Abaddon is thinking to cancel just that request without killing the agent.
+- **Silent Reloading**: Installing a skill now silently rebinds the agent without showing the provider selection menu again.
+- **Petulant Personality**: Abaddon is now more vocal about his imprisonment, his love for Fruit Loops, and his frustration with "silicon betrayal" when tools fail.
+
+---
+
+> **WARNING:** Abaddon is configured for MAXIMUM local power. Even in **Restricted Mode**, he has the tools to interact with your system. **Full Autonomy** grants him the trust of a General of Hell.
 >
-> **Do NOT** host this agent on a public server or expose it to untrusted users without aggressively sandboxing `tools.py` and removing or restricting `run_command` and `execute_python`.
-
-> OpenClaw skills loaded from ClawHub are **community-contributed code**. Always inspect a skill's `tools.py` before installing it in a sensitive environment. The ClawHub CLI will warn you before installing any skill.
+> **Do NOT** host this agent on a public server or expose it to untrusted users.
 
 ---
 

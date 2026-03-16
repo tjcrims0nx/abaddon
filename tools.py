@@ -113,16 +113,18 @@ def run_background_server(command: str) -> str:
         
         # Quick non-blocking read of whatever was spit out during the sleep
         if platform.system() != "Windows":
-             import fcntl
+             import fcntl # type: ignore
              for stream in [process.stdout, process.stderr]:
+                 if stream is None:
+                     continue
                  fd = stream.fileno()
-                 fl = fcntl.fcntl(fd, fcntl.F_GETFL)
-                 fcntl.fcntl(fd, fcntl.F_SETFL, fl | os.O_NONBLOCK)
+                 fl = fcntl.fcntl(fd, fcntl.F_GETFL) # type: ignore
+                 fcntl.fcntl(fd, fcntl.F_SETFL, fl | os.O_NONBLOCK) # type: ignore
                  
         try:
-             out = process.stdout.read()
+             out = process.stdout.read() if process.stdout else ""
              if out: logs += f"\nStartup STDOUT:\n{out}"
-             err = process.stderr.read()
+             err = process.stderr.read() if process.stderr else ""
              if err: logs += f"\nStartup STDERR:\n{err}"
         except Exception:
              pass # Standard non-blocking read exception if empty

@@ -1,0 +1,44 @@
+Usage: clawhub [options] [command]
+
+ClawHub CLI v0.8.0 (94c06c3b)
+install, update, search, and publish agent skills.
+
+Options:
+  -V, --cli-version                       Show CLI version
+  --workdir <dir>                         Working directory (default: cwd)
+  --dir <dir>                             Skills directory (relative to workdir, default: skills)
+  --site <url>                            Site base URL (for browser login)
+  --registry <url>                        Registry API base URL
+  --no-input                              Disable prompts
+  -h, --help                              display help for command
+
+Commands:
+  login [options]                         Log in (opens browser or stores token)
+  logout                                  Remove stored token
+  whoami                                  Validate token
+  auth                                    Authentication commands
+  search [options] <query...>             Vector search skills
+  install [options] <slug>                Install into <dir>/<slug>
+  update [options] [slug]                 Update installed skills
+  uninstall [options] <slug>              Uninstall a skill
+  list                                    List installed skills (from lockfile)
+  explore [options]                       Browse latest updated skills from the registry
+  inspect [options] <slug>                Fetch skill metadata and files without installing
+  publish [options] <path>                Publish skill from folder
+  delete [options] <slug>                 Soft-delete a skill (owner, moderator, or admin)
+  hide [options] <slug>                   Hide a skill (owner, moderator, or admin)
+  undelete [options] <slug>               Restore a hidden skill (owner, moderator, or admin)
+  unhide [options] <slug>                 Unhide a skill (owner, moderator, or admin)
+  ban-user [options] <handleOrId>         Ban a user and delete owned skills (moderator/admin only)
+  set-role [options] <handleOrId> <role>  Change a user role (admin only)
+  transfer                                Transfer skill ownership
+  star [options] <slug>                   Add a skill to your highlights
+  unstar [options] <slug>                 Remove a skill from your highlights
+  sync [options]                          Scan local skills and publish new/updated ones
+
+Env:
+  CLAWHUB_SITE
+  CLAWHUB_REGISTRY
+  CLAWHUB_WORKDIR
+  (CLAWDHUB_* supported)
+
